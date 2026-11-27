@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ตอบรับเข้าร่วมงานจัดเลี้ยงปีใหม่คณะอาจารย์ | MBA รุ่น 14</title>
+  
+  <!-- Google Fonts: Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      --navy-dark: #0f172a;
+      --navy-main: #1e3a8a;
+      --gold-main: #d97706;
+      --gold-light: #fef3c7;
+      --bg-cream: #f8fafc;
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background-color: var(--bg-cream);
+      color: #1e293b;
+      padding-bottom: 3rem;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-main) 100%);
+      color: #ffffff;
+      border-bottom: 4px solid #f59e0b;
+      padding: 2rem 1rem 2.5rem;
+      border-radius: 0 0 1.75rem 1.75rem;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+    }
+
+    .badge-host {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      color: #fcd34d;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+
+    .event-meta-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      margin-top: -1.5rem;
+      padding: 1.25rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .meta-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .meta-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 0.6rem;
+      background: #eff6ff;
+      color: var(--navy-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+    }
+
+    .nav-pills-custom {
+      background: #e2e8f0;
+      padding: 0.35rem;
+      border-radius: 0.85rem;
+    }
+
+    .nav-pills-custom .nav-link {
+      color: #475569;
+      font-weight: 500;
+      border-radius: 0.65rem;
+      padding: 0.6rem 1rem;
+      transition: all 0.2s;
+    }
+
+    .nav-pills-custom .nav-link.active {
+      background-color: var(--navy-dark);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+    }
+
+    .form-card {
+      background: #ffffff;
+      border-radius: 1.1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      padding: 1.5rem;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 0.65rem;
+      padding: 0.65rem 0.9rem;
+      border: 1.5px solid #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--navy-main);
+      box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.15);
+    }
+
+    /* Attendance Radio Cards */
+    .attend-radio {
+      display: none;
+    }
+
+    .attend-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0.75rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      background: #ffffff;
+      height: 100%;
+    }
+
+    .attend-label i {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    #attendYes:checked + .attend-label {
+      border-color: #16a34a;
+      background-color: #f0fdf4;
+      color: #15803d;
+      font-weight: 600;
+    }
+
+    #attendNo:checked + .attend-label {
+      border-color: #dc2626;
+      background-color: #fef2f2;
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .btn-submit-main {
+      background: linear-gradient(135deg, var(--navy-main) 0%, var(--navy-dark) 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 0.8rem 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+      transition: transform 0.15s;
+    }
+
+    .btn-submit-main:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .stat-box {
+      background: #ffffff;
+      border-radius: 0.85rem;
+      padding: 0.9rem;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .status-pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 50px;
+      font-weight: 500;
+      background: #eff6ff;
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="hero-banner text-center">
+    <div class="container" style="max-width: 680px;">
+      <span class="badge-host"><i class="fa-solid fa-champagne-glasses me-1"></i> MBA รุ่นที่ 14 มทร.กรุงเทพ ขอเรียนเชิญ</span>
+      <h1 class="h3 fw-bold mb-1">งานจัดเลี้ยงปีใหม่คณะอาจารย์</h1>
+      <p class="mb-0 text-white-50 small">ร่วมแสดงความเคารพ ขอบคุณคณาจารย์ และสังสรรค์ส่งท้ายปี</p>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 680px;">
+    <!-- Event Details Card -->
+    <div class="event-meta-card mb-3">
+      <div class="row g-2">
+        <div class="col-12 col-sm-6">
+          <div class="meta-item">
+            <div class="meta-icon"><i class="fa-regular fa-calendar-check"></i></div>
+            <div>
+              <div class="fw-semibold">วันเสาร์ที่ 26 ธันวาคม 2026</div>
+              <div class="text-muted small">เวลา 17.00 น. เป็นต้นไป</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="meta-item">
+            <div class="meta-icon"><i class="fa-solid fa-location-dot text-danger"></i></div>
+            <div>
+              <div class="fw-semibold">ร้านอาหารอีสานเดิม</div>
+              <div class="text-muted small">
+                ถนนนางลิ้นจี่ 
+                <a href="https://maps.google.com/?q=ร้านอาหารอีสานเดิม+ถนนนางลิ้นจี่" target="_blank" class="text-decoration-none ms-1">
+                  <i class="fa-solid fa-map-location-dot"></i> แผนที่
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="meta-item">
+            <div class="meta-icon"><i class="fa-solid fa-gift text-warning"></i></div>
+            <div>
+              <div class="fw-semibold">จับฉลากของขวัญ</div>
+              <div class="text-muted small">มูลค่าไม่น้อยกว่า 300 บาท/ท่าน</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="meta-item">
+            <div class="meta-icon"><i class="fa-solid fa-wallet text-success"></i></div>
+            <div>
+              <div class="fw-semibold">ค่าใช้จ่ายร่วมงาน</div>
+              <div class="text-muted small">อาจารย์/จนท. ฟรี | นศ. 1,000 บาท</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-pills nav-pills-custom nav-fill mb-3" id="mainTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="form-tab" data-bs-toggle="pill" data-bs-target="#form-pane" type="button" role="tab">
+          <i class="fa-solid fa-pen-to-square me-1"></i> ลงทะเบียนตอบรับ
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="dashboard-tab" data-bs-toggle="pill" data-bs-target="#dashboard-pane" type="button" role="tab" onclick="loadDashboard()">
+          <i class="fa-solid fa-chart-pie me-1"></i> สรุปยอด & รายชื่อ
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Contents -->
+    <div class="tab-content">
+      <!-- TAB 1: RSVP FORM -->
+      <div class="tab-pane fade show active" id="form-pane" role="tabpanel">
+        <div class="form-card">
+          <form id="rsvpForm" novalidate>
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="fullName" class="form-label">
+                <i class="fa-solid fa-user text-primary me-1"></i> ชื่อ - นามสกุล <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" id="fullName" placeholder="ระบุคำนำหน้า ชื่อ และนามสกุล" required>
+            </div>
+
+            <!-- Status -->
+            <div class="mb-3">
+              <label for="status" class="form-label">
+                <i class="fa-solid fa-id-badge text-primary me-1"></i> สถานะ <span class="text-danger">*</span>
+              </label>
+              <select class="form-select" id="status" required onchange="updateFeeNotice()">
+                <option value="" selected disabled>-- กรุณาเลือกสถานะ --</option>
+                <option value="คณาจารย์">คณาจารย์</option>
+                <option value="เจ้าหน้าที่">เจ้าหน้าที่</option>
+                <option value="MBA รุ่น 13">MBA รุ่น 13</option>
+                <option value="DBA">DBA</option>
+                <option value="MBA รุ่น 14">MBA รุ่น 14</option>
+                <option value="ผู้ติดตาม">ผู้ติดตาม</option>
+              </select>
+            </div>
+
+            <!-- Dynamic Fee Notice -->
+            <div id="feeNotice" class="alert alert-light border small py-2 px-3 mb-3 d-none"></div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">
+                <i class="fa-solid fa-phone text-primary me-1"></i> เบอร์โทรศัพท์ <span class="text-danger">*</span>
+              </label>
+              <input type="tel" class="form-control" id="phone" placeholder="เช่น 0812345678" maxlength="10" inputmode="numeric" required>
+            </div>
+
+            <!-- Attendance -->
+            <div class="mb-4">
+              <label class="form-label d-block mb-2">
+                <i class="fa-solid fa-calendar-check text-primary me-1"></i> การเข้าร่วมงาน <span class="text-danger">*</span>
+              </label>
+              <div class="row g-2">
+                <div class="col-6">
+                  <input type="radio" class="attend-radio" name="attendance" id="attendYes" value="เข้าร่วมได้" required>
+                  <label class="attend-label" for="attendYes">
+                    <i class="fa-solid fa-circle-check text-success"></i>
+                    <span>เข้าร่วมได้</span>
+                  </label>
+                </div>
+                <div class="col-6">
+                  <input type="radio" class="attend-radio" name="attendance" id="attendNo" value="ติดภาระกิจ">
+                  <label class="attend-label" for="attendNo">
+                    <i class="fa-solid fa-circle-xmark text-danger"></i>
+                    <span>ติดภาระกิจ</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-submit-main">
+              <i class="fa-solid fa-paper-plane me-2"></i> ส่งข้อมูลตอบรับเข้าร่วมงาน
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 2: DASHBOARD -->
+      <div class="tab-pane fade" id="dashboard-pane" role="tabpanel">
+        <!-- Top KPIs -->
+        <div class="row g-2 mb-3">
+          <div class="col-4">
+            <div class="stat-box">
+              <div class="text-muted small">ตอบรับทั้งหมด</div>
+              <div class="stat-num text-dark" id="statTotal">0</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="stat-box" style="border-bottom: 3px solid #16a34a;">
+              <div class="text-muted small">เข้าร่วมได้</div>
+              <div class="stat-num text-success" id="statYes">0</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="stat-box" style="border-bottom: 3px solid #dc2626;">
+              <div class="text-muted small">ติดภาระกิจ</div>
+              <div class="stat-num text-danger" id="statNo">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breakdown by Status -->
+        <div class="form-card mb-3 p-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fw-semibold small text-secondary"><i class="fa-solid fa-users me-1"></i> ยอดผู้เข้าร่วมได้แยกตามสถานะ</span>
+            <button class="btn btn-sm btn-outline-success" onclick="copyLineSummary()">
+              <i class="fa-brands fa-line me-1"></i> คัดลอกสรุปส่ง LINE
+            </button>
+          </div>
+          <div class="row g-2 small" id="statusBreakdown"></div>
+        </div>
+
+        <!-- Filter & List -->
+        <div class="form-card p-3">
+          <div class="row g-2 mb-3">
+            <div class="col-12 col-sm-6">
+              <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="ค้นหาชื่อ-สกุล..." oninput="renderList()">
+            </div>
+            <div class="col-6 col-sm-3">
+              <select id="filterStatus" class="form-select form-select-sm" onchange="renderList()">
+                <option value="ALL">ทุกสถานะ</option>
+                <option value="คณาจารย์">คณาจารย์</option>
+                <option value="เจ้าหน้าที่">เจ้าหน้าที่</option>
+                <option value="MBA รุ่น 13">MBA รุ่น 13</option>
+                <option value="DBA">DBA</option>
+                <option value="MBA รุ่น 14">MBA รุ่น 14</option>
+                <option value="ผู้ติดตาม">ผู้ติดตาม</option>
+              </select>
+            </div>
+            <div class="col-6 col-sm-3">
+              <select id="filterAttend" class="form-select form-select-sm" onchange="renderList()">
+                <option value="ALL">ทุกการตอบรับ</option>
+                <option value="เข้าร่วมได้">เข้าร่วมได้</option>
+                <option value="ติดภาระกิจ">ติดภาระกิจ</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="attendeeList" class="list-group list-group-flush">
+            <div class="text-center text-muted py-4 small">กำลังโหลดข้อมูล...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // =========================================================================
+    // นำ Web App URL จาก Google Apps Script (ลงท้ายด้วย /exec) มาวางแทนที่ด้านล่างนี้
+    // =========================================================================
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvPguWcwj1TDc9KyoJhMos9CcE-tc4v5a3RVDcMw1TUdSienYHLWosUlN2_KG_kP6R/exec';
+
+    let allRecords = [];
+    const STATUS_LIST = ['คณาจารย์', 'เจ้าหน้าที่', 'MBA รุ่น 13', 'DBA', 'MBA รุ่น 14', 'ผู้ติดตาม'];
+
+    // จำกัดให้พิมพ์เบอร์โทรได้เฉพาะตัวเลข
+    document.getElementById('phone').addEventListener('input', function () {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    function updateFeeNotice() {
+      const status = document.getElementById('status').value;
+      const box = document.getElementById('feeNotice');
+      box.classList.remove('d-none', 'alert-success', 'alert-warning');
+
+      if (status === 'คณาจารย์' || status === 'เจ้าหน้าที่') {
+        box.classList.add('alert-success');
+        box.innerHTML = '<i class="fa-solid fa-circle-info me-1"></i> <strong>ไม่มีค่าใช้จ่ายในการร่วมงาน</strong> (ขอความร่วมมือนำของขวัญจับฉลากมูลค่าไม่น้อยกว่า 300 บาท)';
+      } else {
+        box.classList.add('alert-warning');
+        box.innerHTML = '<i class="fa-solid fa-circle-info me-1"></i> <strong>ค่าใช้จ่ายร่วมงานท่านละ 1,000 บาท</strong> และขอความร่วมมือนำของขวัญจับฉลากมูลค่าไม่น้อยกว่า 300 บาท';
+      }
+    }
+
+    function checkScriptUrl() {
+      if (!SCRIPT_URL || !SCRIPT_URL.startsWith('https://script.google.com/')) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'ยังไม่ได้ตั้งค่า Web App URL',
+          text: 'กรุณานำ URL จากการ Deploy Google Apps Script มาใส่ในตัวแปร SCRIPT_URL ในไฟล์ index.html ก่อนใช้งาน',
+          confirmButtonColor: '#1e3a8a'
+        });
+        return false;
+      }
+      return true;
+    }
+
+    document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!checkScriptUrl()) return;
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const status = document.getElementById('status').value;
+      const phone = document.getElementById('phone').value.trim();
+      const attendanceEl = document.querySelector('input[name="attendance"]:checked');
+
+      if (!fullName || !status || !phone || !attendanceEl) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'กรอกข้อมูลไม่ครบถ้วน',
+          text: 'กรุณาระบุชื่อ-สกุล สถานะ เบอร์โทร และเลือกการเข้าร่วมงาน',
+          confirmButtonColor: '#1e3a8a'
+        });
+        return;
+      }
+
+      if (phone.length < 9) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'เบอร์โทรศัพท์ไม่ถูกต้อง',
+          text: 'กรุณากรอกเบอร์โทรศัพท์ 9-10 หลัก',
+          confirmButtonColor: '#1e3a8a'
+        });
+        return;
+      }
+
+      const attendance = attendanceEl.value;
+
+      Swal.fire({
+        title: 'กำลังบันทึกข้อมูล...',
+        text: 'กรุณารอสักครู่',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ fullName, status, phone, attendance })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          await Swal.fire({
+            icon: 'success',
+            title: 'บันทึกการตอบรับสำเร็จ!',
+            html: `
+              <div class="text-start bg-light p-3 rounded border small">
+                <div class="mb-1"><strong>ชื่อ-สกุล:</strong> ${escapeHtml(fullName)}</div>
+                <div class="mb-1"><strong>สถานะ:</strong> ${escapeHtml(status)}</div>
+                <div class="mb-1"><strong>เบอร์โทร:</strong> ${escapeHtml(phone)}</div>
+                <div><strong>การเข้าร่วม:</strong> <span class="badge ${attendance === 'เข้าร่วมได้' ? 'bg-success' : 'bg-danger'}">${escapeHtml(attendance)}</span></div>
+              </div>
+              <div class="text-muted small mt-2">สามารถแคปหน้าจอนี้ไว้เป็นหลักฐานการลงทะเบียนได้</div>
+            `,
+            confirmButtonText: 'ตกลง',
+            confirmButtonColor: '#1e3a8a'
+          });
+          document.getElementById('rsvpForm').reset();
+          document.getElementById('feeNotice').classList.add('d-none');
+        } else {
+          throw new Error(result.message || 'เกิดข้อผิดพลาดในการบันทึก');
+        }
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'ไม่สามารถบันทึกข้อมูลได้',
+          text: err.message,
+          confirmButtonColor: '#dc2626'
+        });
+      }
+    });
+
+    async function loadDashboard() {
+      if (!checkScriptUrl()) return;
+      const listEl = document.getElementById('attendeeList');
+      listEl.innerHTML = '<div class="text-center text-muted py-4 small"><i class="fa-solid fa-spinner fa-spin me-1"></i> กำลังดึงข้อมูลล่าสุด...</div>';
+
+      try {
+        const res = await fetch(SCRIPT_URL);
+        const json = await res.json();
+        if (json.status === 'success') {
+          allRecords = json.data || [];
+          updateStats();
+          renderList();
+        } else {
+          throw new Error(json.message);
+        }
+      } catch (err) {
+        listEl.innerHTML = `<div class="text-center text-danger py-3 small">โหลดข้อมูลไม่สำเร็จ: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    function updateStats() {
+      const total = allRecords.length;
+      const yesList = allRecords.filter(r => r.attendance === 'เข้าร่วมได้');
+      const noCount = total - yesList.length;
+
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statYes').textContent = yesList.length;
+      document.getElementById('statNo').textContent = noCount;
+
+      const breakdownEl = document.getElementById('statusBreakdown');
+      breakdownEl.innerHTML = STATUS_LIST.map(st => {
+        const countYes = yesList.filter(r => r.status === st).length;
+        return `
+          <div class="col-6 col-sm-4">
+            <div class="d-flex justify-content-between align-items-center bg-light rounded px-2 py-1 border">
+              <span>${st}</span>
+              <span class="fw-bold text-primary">${countYes}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderList() {
+      const search = document.getElementById('searchInput').value.trim().toLowerCase();
+      const fStatus = document.getElementById('filterStatus').value;
+      const fAttend = document.getElementById('filterAttend').value;
+
+      const filtered = allRecords.filter(r => {
+        const matchName = r.fullName.toLowerCase().includes(search);
+        const matchStatus = fStatus === 'ALL' || r.status === fStatus;
+        const matchAttend = fAttend === 'ALL' || r.attendance === fAttend;
+        return matchName && matchStatus && matchAttend;
+      });
+
+      const listEl = document.getElementById('attendeeList');
+      if (filtered.length === 0) {
+        listEl.innerHTML = '<div class="text-center text-muted py-4 small">ไม่พบรายชื่อผู้ลงทะเบียน</div>';
+        return;
+      }
+
+      listEl.innerHTML = filtered.map((r, idx) => {
+        const isYes = r.attendance === 'เข้าร่วมได้';
+        const maskedPhone = r.phone.length >= 7
+          ? r.phone.slice(0, 3) + '-xxx-' + r.phone.slice(-4)
+          : r.phone;
+
+        return `
+          <div class="list-group-item px-0 py-2 d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-medium">${escapeHtml(r.fullName)}</div>
+              <div class="small text-muted">
+                <span class="status-pill me-1">${escapeHtml(r.status)}</span>
+                <span><i class="fa-solid fa-phone fa-xs me-1"></i>${escapeHtml(maskedPhone)}</span>
+              </div>
+            </div>
+            <span class="badge ${isYes ? 'bg-success-subtle text-success border border-success-subtle' : 'bg-danger-subtle text-danger border border-danger-subtle'} rounded-pill px-3 py-2">
+              ${isYes ? '<i class="fa-solid fa-check me-1"></i>เข้าร่วมได้' : '<i class="fa-solid fa-xmark me-1"></i>ติดภาระกิจ'}
+            </span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function copyLineSummary() {
+      const yesList = allRecords.filter(r => r.attendance === 'เข้าร่วมได้');
+      const noCount = allRecords.length - yesList.length;
+
+      let text = `📊 สรุปยอดตอบรับงานเลี้ยงปีใหม่คณะอาจารย์ (MBA 14)\n`;
+      text += `🗓 เสาร์ที่ 26 ธ.ค. 2026 | ร้านอีสานเดิม\n`;
+      text += `━━━━━━━━━━━━━━\n`;
+      text += `✅ เข้าร่วมได้: ${yesList.length} ท่าน\n`;
+      STATUS_LIST.forEach(st => {
+        const c = yesList.filter(r => r.status === st).length;
+        text += `  • ${st}: ${c} ท่าน\n`;
+      });
+      text += `❌ ติดภาระกิจ: ${noCount} ท่าน\n`;
+      text += `📝 ตอบรับรวมทั้งหมด: ${allRecords.length} ท่าน`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'คัดลอกสรุปยอดสำหรับส่ง LINE แล้ว',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&')
+        .replace(/</g, '<')
+        .replace(/>/g, '>')
+        .replace(/"/g, '"')
+        .replace(/'/g, ''');
+    }
+  </script>
+</body>
+</html>
